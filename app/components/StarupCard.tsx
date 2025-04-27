@@ -6,8 +6,8 @@ import Image from "next/image";
 
 const StarupCard = ({ Posts }: { Posts: startupTypeCard }) => {
   return (
-    <li className="bg-white border-[5px] border-black py-6 px-5 rounded-[22px] shadow-200 hover:border-primary transition-all duration-500 hover:shadow-300 hover:bg-primary-100">
-      <div className="flex-between">
+    <li className="bg-white border-[5px] border-black py-6 px-5 rounded-[22px]  hover:border-[#EE2B69] transition-all duration-500 hover:shadow-xl hover:bg-pink-100">
+      <div className="flex flex-row justify-between">
         <p className="font-medium text-[16px] bg-primary-100 px-4 py-2 rounded-full group-hover:bg-white-100">
           {formatdate(Posts._createdAt)}
         </p>
@@ -16,13 +16,15 @@ const StarupCard = ({ Posts }: { Posts: startupTypeCard }) => {
           <span>{Posts.views}</span>
         </div>
       </div>
-      <div>
+      <div className="flex justify-between">
         <div>
           <Link href={`/user/${Posts.author?._id}`}>
-            <p className="text-lg line-clamp-1">{Posts.author.name}</p>
+            <p className=" font-semibold ml-4 text-lg line-clamp-1">
+              {Posts.author.name}
+            </p>
           </Link>
           <Link href={`/startup/${Posts._id}`}>
-            <h3>{Posts.title}</h3>
+            <h3 className="font-bold ml-4 mt-1 text-xl">{Posts.title}</h3>
           </Link>
         </div>
         <Link href={`/user/${Posts.author?._id}`}>
@@ -31,14 +33,19 @@ const StarupCard = ({ Posts }: { Posts: startupTypeCard }) => {
             alt="placeholder"
             width={48}
             height={48}
-            className="rounded-full"
+            className="rounded-full "
           />
         </Link>
       </div>
       <Link href={`/startup/${Posts._id}`}>
-        <p>{Posts.description}</p>
-        <img src={`${Posts.image}`} alt="place" />
+        <p className="ml-4 mt-2 mb-1">{Posts.description}</p>
+        <img src={`${Posts.image}`} alt="place" className="rounded-lg " />
       </Link>
+      <div>
+        <Link href={""}>
+          <p className="ml-4 mt-2">{Posts.category}</p>
+        </Link>
+      </div>
     </li>
   );
 };

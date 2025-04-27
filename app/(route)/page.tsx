@@ -15,7 +15,7 @@ export default async function Home({
       author: { _id: "1", name: "yash" },
       _id: 1,
 
-      description: "This is dd",
+      description: "This is decription",
       image:
         "https://www.cloudways.com/blog/wp-content/uploads/Main-Image_750x394-8.jpg",
       category: "robots",
