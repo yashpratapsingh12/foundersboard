@@ -1,13 +1,26 @@
 import Image from "next/image";
 import SearchForm from "../components/SearchForm";
-import { promises } from "dns";
+import StarupCard from "../components/StarupCard";
 
 export default async function Home({
   searchParams,
 }: {
   searchParams: Promise<{ query?: string }>;
 }) {
-  const query = await (await searchParams).query;
+  const query = (await searchParams).query;
+  const Posts = [
+    {
+      createdAt: "yesterday",
+      views: 55,
+      author: { id: "1" },
+
+      descrip: "This is dd",
+      image:
+        "https://www.cloudways.com/blog/wp-content/uploads/Main-Image_750x394-8.jpg",
+      category: "robots",
+    },
+  ];
+
   return (
     <>
       <section className="w-full bg-[#EE2B69] min-h-[530px] flex justify-center items-center flex-col py-10 px-6  ">
@@ -19,6 +32,18 @@ export default async function Home({
           Submit Ideas , Vote on Pitches ,and Get Noticed in Virtual
         </p>
         <SearchForm query={query} />
+      </section>
+      <section className="ml-3 mt-5">
+        <p className="text-xl font-semibold">
+          {query ? `Searhc results for ${query}` : "All Startups"}
+        </p>
+        <ul className="mt-7 grid grid-cols-1 md:grid-cols-3">
+          {Posts.length > 0 ? (
+            Posts.map((item) => <StarupCard />)
+          ) : (
+            <p className="">No straups found</p>
+          )}
+        </ul>
       </section>
     </>
   );
