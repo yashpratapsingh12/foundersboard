@@ -10,14 +10,16 @@ export default async function Home({
   const query = (await searchParams).query;
   const Posts = [
     {
-      createdAt: "yesterday",
+      _createdAt: new Date(),
       views: 55,
-      author: { id: "1" },
+      author: { _id: "1" },
+      _id: 1,
 
-      descrip: "This is dd",
+      description: "This is dd",
       image:
         "https://www.cloudways.com/blog/wp-content/uploads/Main-Image_750x394-8.jpg",
       category: "robots",
+      title: "we Robots",
     },
   ];
 
@@ -39,7 +41,9 @@ export default async function Home({
         </p>
         <ul className="mt-7 grid grid-cols-1 md:grid-cols-3">
           {Posts.length > 0 ? (
-            Posts.map((item) => <StarupCard />)
+            Posts.map((item, index) => (
+              <StarupCard key={item?._id} Posts={item} />
+            ))
           ) : (
             <p className="">No straups found</p>
           )}
