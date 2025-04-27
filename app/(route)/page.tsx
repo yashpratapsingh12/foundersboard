@@ -12,7 +12,7 @@ export default async function Home({
     {
       _createdAt: new Date(),
       views: 55,
-      author: { _id: "1" },
+      author: { _id: "1", name: "yash" },
       _id: 1,
 
       description: "This is dd",

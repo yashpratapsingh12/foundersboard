@@ -6,6 +6,12 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 
-export const format = (date:string) => {
-return new Date(date).toLocaleDateString
+export const formatdate = (date:string) => {
+return new Date(date).toLocaleDateString("en-US",{
+  month:'long',
+  day:'numeric',
+  year:'numeric'
+
+
+})
 }
