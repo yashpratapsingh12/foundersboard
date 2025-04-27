@@ -1,7 +1,13 @@
 import Image from "next/image";
 import SearchForm from "../components/SearchForm";
+import { promises } from "dns";
 
-export default function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ query?: string }>;
+}) {
+  const query = await (await searchParams).query;
   return (
     <>
       <section className="w-full bg-[#EE2B69] min-h-[530px] flex justify-center items-center flex-col py-10 px-6  ">
@@ -12,7 +18,7 @@ export default function Home() {
         <p className="font-medium text-white text-[20px] text-center">
           Submit Ideas , Vote on Pitches ,and Get Noticed in Virtual
         </p>
-        <SearchForm />
+        <SearchForm query={query} />
       </section>
     </>
   );
