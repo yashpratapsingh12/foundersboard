@@ -3,6 +3,9 @@ import { formatdate } from "@/lib/utils";
 import { EyeIcon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { Startup, Author } from "@/sanity/types";
+
+export type startupTypeCard = Omit<Startup, "author"> & { author?: Author };
 
 const StarupCard = ({ Posts }: { Posts: startupTypeCard }) => {
   return (
@@ -20,7 +23,7 @@ const StarupCard = ({ Posts }: { Posts: startupTypeCard }) => {
         <div>
           <Link href={`/user/${Posts.author?._id}`}>
             <p className=" font-semibold ml-4 text-lg line-clamp-1">
-              {Posts.author.name}
+              {Posts.author?.name}
             </p>
           </Link>
           <Link href={`/startup/${Posts._id}`}>

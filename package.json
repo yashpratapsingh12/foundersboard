@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "predev": "npm run typegen",
+    "prebuild": "npm run typegen",
+    "typegen": "sanity schema extract --path=./sanity/extract.json && sanity typegen generate"
   },
   "packageManager": "npm@10.5.2",
   "overrides": {
@@ -23,7 +26,7 @@
     "lucide-react": "^0.503.0",
     "next": "15.3.0",
     "next-auth": "^5.0.0-beta.26",
-    "next-sanity": "^9.8.58-canary.0",
+    "next-sanity": "^9.10.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "sanity": "^3.86.1",
@@ -42,6 +45,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.3.0",
     "postcss": "^8.5.3",
+    "sanity-codegen": "^0.9.8",
     "tailwindcss": "^4.1.4",
     "tw-animate-css": "^1.2.8",
     "typescript": "^5"

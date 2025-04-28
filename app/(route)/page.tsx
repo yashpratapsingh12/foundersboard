@@ -1,6 +1,6 @@
 import Image from "next/image";
 import SearchForm from "../components/SearchForm";
-import StarupCard from "../components/StarupCard";
+import StarupCard, { startupTypeCard } from "../components/StarupCard";
 import { client } from "@/sanity/lib/client";
 import { STARTUP_QUERY } from "@/sanity/lib/queries";
 
@@ -31,7 +31,7 @@ export default async function Home({
         </p>
         <ul className="mt-7 grid grid-cols-1 md:grid-cols-3">
           {Posts.length > 0 ? (
-            Posts.map((item, index) => (
+            Posts.map((item: startupTypeCard) => (
               <StarupCard key={item?._id} Posts={item} />
             ))
           ) : (
