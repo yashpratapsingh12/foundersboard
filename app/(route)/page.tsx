@@ -1,6 +1,8 @@
 import Image from "next/image";
 import SearchForm from "../components/SearchForm";
 import StarupCard from "../components/StarupCard";
+import { client } from "@/sanity/lib/client";
+import { STARTUP_QUERY } from "@/sanity/lib/queries";
 
 export default async function Home({
   searchParams,
@@ -8,20 +10,8 @@ export default async function Home({
   searchParams: Promise<{ query?: string }>;
 }) {
   const query = (await searchParams).query;
-  const Posts = [
-    {
-      _createdAt: new Date(),
-      views: 55,
-      author: { _id: "1", name: "yash" },
-      _id: 1,
 
-      description: "This is decription",
-      image:
-        "https://www.cloudways.com/blog/wp-content/uploads/Main-Image_750x394-8.jpg",
-      category: "robots",
-      title: "we Robots",
-    },
-  ];
+  const Posts = await client.fetch(STARTUP_QUERY);
 
   return (
     <>
