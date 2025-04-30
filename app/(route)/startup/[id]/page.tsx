@@ -18,7 +18,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
         <h1>{post.title}</h1>
         <p>{post.description}</p>
       </section>
-      <div className="text-3xl">{}</div>
+      <div className="text-3xl">{post.title}</div>
     </>
   );
 };
