@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "nodemon page.tsx",
     "lint": "next lint",
     "predev": "npm run typegen",
     "prebuild": "npm run typegen",
@@ -45,6 +45,7 @@
     "autoprefixer": "^10.4.21",
     "eslint": "^9",
     "eslint-config-next": "15.3.0",
+    "nodemon": "^3.1.10",
     "postcss": "^8.5.3",
     "sanity-codegen": "^0.9.8",
     "tailwindcss": "^4.1.4",
