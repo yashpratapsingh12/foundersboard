@@ -6,14 +6,18 @@ import { notFound } from "next/navigation";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import markdownit from "markdown-it";
 
 export const experimental_ppr = true;
+const md = markdownit();
 
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = (await params).id;
 
   const post = await client.fetch(STARTUP_BY_ID_QUERY, { id });
   if (!post) return notFound();
+  const parsecont = md.render(post?.Pitch || "");
+
   return (
     <>
       <section className="w-full bg-[#EE2B69] !min-h-[230px] flex justify-center items-center flex-col py-10 px-6 ">
@@ -35,10 +39,29 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
         />
         <div>
           <div>
-            <Link href={``}>
-              <Image src={post.author.image} alt="user" />
+            <Link href={`/users/${post.author?.id}`} className="flex gap-2">
+              <Image
+                src={post.author.image}
+                alt="user"
+                width={64}
+                height={64}
+                className="rounded-full drop-shadow-lg"
+              />
+              <div>
+                <p className="font-semibold uppercase text-lg">
+                  {post.author.name}
+                </p>
+                <p className="text-white-100">@{post.author.username}</p>
+              </div>
             </Link>
+            <p>{post.category}</p>
           </div>
+          <h3 className="text-30">Pitch Details</h3>
+          {parsecont ? (
+            <article dangerouslySetInnerHTML={{ __html: parsecont }} />
+          ) : (
+            <p>No details Provided</p>
+          )}
         </div>
       </section>
     </>
