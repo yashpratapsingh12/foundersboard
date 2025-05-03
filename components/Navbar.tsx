@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import logo from "../../public/logo.png";
+import logo from "../assets/public/logo.png";
 import { auth, signIn, signOut } from "@/auth";
 import { redirect } from "next/dist/server/api-utils";
 const Navbar = async () => {
@@ -29,7 +29,7 @@ const Navbar = async () => {
                 <button>SignOut</button>
               </form>
 
-              <Link href={`/user/${session}`}>
+              <Link href={`/user/${session?.id}`}>
                 <span>{session?.user?.name}</span>
               </Link>
             </>

@@ -8,7 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import markdownit from "markdown-it";
 import { Skeleton } from "@/components/skeleton";
-import { View } from "lucide-react";
+import View from "@/components/View";
 
 export const experimental_ppr = true;
 const md = markdownit();
@@ -67,7 +67,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
         </div>
         <hr />
       </section>
-      <Suspense fallback={<Skeleton className="" />}>
+      <Suspense fallback={<Skeleton />}>
         <View id={id} />
       </Suspense>
     </>

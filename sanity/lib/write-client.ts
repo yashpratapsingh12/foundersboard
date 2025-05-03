@@ -1,4 +1,4 @@
-import "server-onlys"
+import "server-only"
 
 import { createClient } from 'next-sanity'
 
