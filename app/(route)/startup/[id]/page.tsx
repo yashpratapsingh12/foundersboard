@@ -1,12 +1,14 @@
-import { startupTypeCard } from "@/app/components/StarupCard";
+import { startupTypeCard } from "@/components/StarupCard";
 import { formatdate } from "@/lib/utils";
 import { client } from "@/sanity/lib/client";
 import { STARTUP_BY_ID_QUERY } from "@/sanity/lib/queries";
 import { notFound } from "next/navigation";
-import React from "react";
+import React, { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import markdownit from "markdown-it";
+import { Skeleton } from "@/components/skeleton";
+import { View } from "lucide-react";
 
 export const experimental_ppr = true;
 const md = markdownit();
@@ -16,7 +18,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
   const post = await client.fetch(STARTUP_BY_ID_QUERY, { id });
   if (!post) return notFound();
-  const parsecont = md.render(post?.Pitch || "");
+  const parsecont = md.render(post?.pitch || "");
 
   return (
     <>
@@ -63,7 +65,11 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
             <p>No details Provided</p>
           )}
         </div>
+        <hr />
       </section>
+      <Suspense fallback={<Skeleton className="" />}>
+        <View id={id} />
+      </Suspense>
     </>
   );
 };
