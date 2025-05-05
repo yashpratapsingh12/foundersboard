@@ -1,7 +1,7 @@
-import React from "react";
+"use client";
 
-const StartupForm = () => {
-  return <div></div>;
+const StartupForm = async () => {
+  return <></>;
 };
 
 export default StartupForm;

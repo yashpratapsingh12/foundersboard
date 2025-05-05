@@ -1,7 +1,14 @@
+// import { auth } from "@/auth";
 import StartupForm from "@/components/StartupForm";
+import { redirect } from "next/navigation";
 import React from "react";
 
-const page = () => {
+const page = async () => {
+  // const session = await auth();
+
+  // if (!session) redirect("/");
+
+  console.log("hello");
   return (
     <>
       <section className="w-full bg-[#EE2B69] !min-h-[230px]">
@@ -9,7 +16,6 @@ const page = () => {
           Submit Your Startups
         </h1>
       </section>
-      <StartupForm />
     </>
   );
 };

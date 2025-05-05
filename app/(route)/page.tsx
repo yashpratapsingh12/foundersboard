@@ -15,8 +15,6 @@ export default async function Home({
   const params = { search: query || null };
   const sess = await auth();
 
-  console.log(sess?.id);
-
   // const Posts = await client.fetch(STARTUP_QUERY);
   const { data: Posts } = await sanityFetch({ query: STARTUP_QUERY, params });
 
