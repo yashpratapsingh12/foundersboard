@@ -4,10 +4,14 @@ import { useState } from "react";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import MDEditor from "@uiw/react-md-editor";
+import { Button } from "./ui/button";
+import { Send } from "lucide-react";
 
 const StartupForm = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [pitch, setPitch] = useState("pitch");
+
+  const [isPending, setispe] = useState(false);
 
   return (
     <>
@@ -44,7 +48,7 @@ const StartupForm = () => {
           <label htmlFor="link">Image Url</label>
           <Input
             id="link"
-            name="link"
+            name="Link"
             required
             placeholder="Stratup ImageUrl"
           />
@@ -56,9 +60,20 @@ const StartupForm = () => {
           <MDEditor
             value={pitch}
             onChange={(value) => setPitch(value as string)}
+            id="pitch"
+            preview="edit"
+            height={300}
+            textareaProps={{
+              placeholder: "Briefly describe about your Startup",
+            }}
           />
-          {errors.link && <p>{errors.link}</p>}
+          {errors.pitch && <p>{errors.pitch}</p>}
         </div>
+
+        <Button type="submit" disabled={isPending}>
+          {isPending ? "submitting...." : "Submit Your Startup "}
+          <Send className="size-6 ml-2" />
+        </Button>
       </form>
     </>
   );
