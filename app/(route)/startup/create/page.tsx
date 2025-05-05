@@ -1,12 +1,13 @@
-// import { auth } from "@/auth";
+import { auth } from "@/auth";
+
 import StartupForm from "@/components/StartupForm";
 import { redirect } from "next/navigation";
 import React from "react";
 
 const page = async () => {
-  // const session = await auth();
+  const session = await auth();
 
-  // if (!session) redirect("/");
+  if (!session) redirect("/");
 
   console.log("hello");
   return (
@@ -16,6 +17,7 @@ const page = async () => {
           Submit Your Startups
         </h1>
       </section>
+      <StartupForm />
     </>
   );
 };
