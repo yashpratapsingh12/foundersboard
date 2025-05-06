@@ -3,6 +3,7 @@ import { auth } from "@/auth";
 import StartupForm from "@/components/StartupForm";
 import { redirect } from "next/navigation";
 import React from "react";
+import MM from "@/app/MM/MM";
 
 const page = async () => {
   const session = await auth();
