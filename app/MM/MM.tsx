@@ -1,6 +1,5 @@
 const MM = () => {
-  console.log("MM");
-  return <div>qdj</div>;
+  return <div></div>;
 };
 
 export default MM;
