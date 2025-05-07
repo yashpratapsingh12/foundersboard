@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Send } from "lucide-react";
 import { formSchema } from "@/lib/validation";
 import { z } from "zod";
+import { toast } from "sonner";
 
 const StartupForm = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -31,8 +32,11 @@ const StartupForm = () => {
 
         setErrors(fieldErorrs as unknown as Record<string, string>);
 
+        toast.error("Please check your inputs and try again");
         return { ...prevState, error: "Validation failed", status: "ERROR" };
       }
+
+      toast.error("An unexpected error has happened");
 
       return {
         ...prevState,
