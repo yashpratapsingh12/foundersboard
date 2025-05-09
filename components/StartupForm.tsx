@@ -10,7 +10,7 @@ import { formSchema } from "@/lib/validation";
 import { z } from "zod";
 import { toast } from "sonner";
 import { createPitch } from "@/lib/Action";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const StartupForm = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -35,7 +35,7 @@ const StartupForm = () => {
       if (result.status == "SUCCESS") {
         toast.success("Your startup pitch has been created successfully");
       }
-      route.push(`startup/${result._id}`);
+      route.push(`/startup/${result._id}`);
     } catch (error) {
       if (error instanceof z.ZodError) {
         const fieldErorrs = error.flatten().fieldErrors;
