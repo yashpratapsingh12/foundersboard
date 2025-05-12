@@ -10,7 +10,12 @@ const SearchForm = ({ query }: { query?: string }) => {
       scroll={false}
       className=" w-80 text-center bg-white uppercase font-bold rounded-2xl mt-5 py-3 border-3 border-black flex justify-between search-form"
     >
-      <input name="query" defaultValue={query} placeholder="Search Starups" />
+      <input
+        name="query"
+        defaultValue={query}
+        placeholder="Search Startups"
+        className="text-center focus:outline-none focus:placeholder-transparent"
+      />
       <div className="flex gap-1">
         {query && <SearchFormReset />}
 

@@ -20,7 +20,7 @@ export default async function Home({
 
   return (
     <>
-      <section className="w-full bg-[#EE2B69] min-h-[530px] flex justify-center items-center flex-col py-10 px-6  ">
+      <section className="w-full bg-[#EE2B69] min-h-[530px] pattern flex justify-center items-center flex-col py-10 px-6">
         <h1 className="uppercase bg-black px-6 py-10 font-extrabold  text-white text-3xl md:text-3xl text-center my-2 w-full mx-auto ">
           Pitch Your Startup
           <br /> Connect with Entrepreneur
@@ -34,7 +34,7 @@ export default async function Home({
         <p className="text-xl font-semibold">
           {query ? `Searhc results for ${query}` : "All Startups"}
         </p>
-        <ul className="mt-7 grid grid-cols-1 md:grid-cols-3">
+        <ul className="mt-7 grid grid-cols-1 md:grid-cols-3 gap-3">
           {Posts.length > 0 ? (
             Posts.map((item: startupTypeCard) => (
               <StarupCard key={item?._id} Posts={item} />
