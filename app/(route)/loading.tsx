@@ -1,7 +1,12 @@
+import { Skeleton } from "@/components/skeleton";
 import React from "react";
 
 const loading = () => {
-  return <div>Loaduiiiii</div>;
+  return (
+    <div>
+      <Skeleton />
+    </div>
+  );
 };
 
 export default loading;
