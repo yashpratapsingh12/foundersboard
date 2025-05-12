@@ -62,24 +62,29 @@ const StartupForm = () => {
   });
 
   return (
-    <form action={formAction} className="startup-form">
+    <form
+      action={formAction}
+      className="max-w-2xl mx-auto bg-white my-10 space-y-8 px-6"
+    >
       <div>
-        <label htmlFor="title" className="startup-form_label">
+        <label htmlFor="title" className="uppercase font-bold">
           Title
         </label>
         <Input
           id="title"
           name="title"
-          className="startup-form_input"
+          className="rounded-full"
           required
           placeholder="Startup Title"
         />
 
-        {errors.title && <p className="startup-form_error">{errors.title}</p>}
+        {errors.title && (
+          <p className="text-red-500 mt-2 ml-5">{errors.title}</p>
+        )}
       </div>
 
       <div>
-        <label htmlFor="description" className="startup-form_label">
+        <label htmlFor="description" className="uppercase font-bold">
           Description
         </label>
         <Textarea
@@ -91,44 +96,44 @@ const StartupForm = () => {
         />
 
         {errors.description && (
-          <p className="startup-form_error">{errors.description}</p>
+          <p className="text-red-500 mt-2 ml-5">{errors.description}</p>
         )}
       </div>
 
       <div>
-        <label htmlFor="category" className="startup-form_label">
+        <label htmlFor="category" className="uppercase font-bold">
           Category
         </label>
         <Input
           id="category"
           name="category"
-          className="startup-form_input"
+          className="rounded-full"
           required
           placeholder="Startup Category (Tech, Health, Education...)"
         />
 
         {errors.category && (
-          <p className="startup-form_error">{errors.category}</p>
+          <p className="text-red-500 mt-2 ml-5">{errors.category}</p>
         )}
       </div>
 
       <div>
-        <label htmlFor="link" className="startup-form_label">
+        <label htmlFor="link" className="uppercase font-bold">
           Image URL
         </label>
         <Input
           id="link"
           name="link"
-          className="startup-form_input"
+          className="rounded-full"
           required
           placeholder="Startup Image URL"
         />
 
-        {errors.link && <p className="startup-form_error">{errors.link}</p>}
+        {errors.link && <p className="text-red-500 mt-2 ml-5">{errors.link}</p>}
       </div>
 
       <div data-color-mode="light">
-        <label htmlFor="pitch" className="startup-form_label">
+        <label htmlFor="pitch" className="uppercase font-bold">
           Pitch
         </label>
 
@@ -148,7 +153,9 @@ const StartupForm = () => {
           }}
         />
 
-        {errors.pitch && <p className="startup-form_error">{errors.pitch}</p>}
+        {errors.pitch && (
+          <p className="text-red-500 mt-2 ml-5">{errors.pitch}</p>
+        )}
       </div>
 
       <Button type="submit" disabled={isPending}>
