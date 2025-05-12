@@ -4,6 +4,7 @@ import { writeclient } from "@/sanity/lib/write-client";
 import { image } from "@uiw/react-md-editor";
 import slugify from "slugify";
 import { parseServerActionResponse } from "./utils";
+import { signIn } from "@/auth";
 
 
 export const createPitch= async(state:any, form:FormData,pitch:String)=>{
@@ -68,3 +69,4 @@ try{
 
 
 }
+

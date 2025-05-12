@@ -1,24 +1,29 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
-import { auth, signOut, signIn } from "@/auth";
+import logo from "../assets/public/logo.png";
+import { signIn, signOut } from "@/auth";
+import { useTransition } from "react";
+import { log } from "../lib/Action";
 
-const Navbar = async () => {
-  const session = await auth();
+const NavbarClient = ({ session }: { session: any }) => {
+  const [isPending, startTransition] = useTransition();
 
   return (
     <header className="px-5 py-3 bg-white shadow-sm font-work-sans">
       <nav className="flex justify-between items-center">
         <Link href="/">
-          <Image src="/logo.png" alt="logo" width={144} height={30} />
+          <Image src={logo} alt="logo" width={144} height={30} />
         </Link>
 
         <div className="flex items-center gap-5 text-black">
-          {session && session?.user ? (
+          {session?.user ? (
             <>
-              <Link href="/startup/create">
-                <span className="max-sm:hidden">Create</span>
+              <Link className="font-work-sans" href="/startup/create">
+                <span>create</span>
               </Link>
-
+              {/* 
               <form
                 action={async () => {
                   "use server";
@@ -29,18 +34,14 @@ const Navbar = async () => {
                 <button type="submit">
                   <span className="max-sm:hidden">Logout</span>
                 </button>
-              </form>
+              </form> */}
 
-              <Link href={`/user/${session?.id}`}>session?.user?.name</Link>
+              <Link href={`/user/${session.id}`}>
+                <span>{session?.user?.name}</span>
+              </Link>
             </>
           ) : (
-            <form
-              action={async () => {
-                "use server";
-
-                await signIn("github");
-              }}
-            >
+            <form action={log}>
               <button type="submit">Login</button>
             </form>
           )}
@@ -50,4 +51,4 @@ const Navbar = async () => {
   );
 };
 
-export default Navbar;
+export default NavbarClient;
