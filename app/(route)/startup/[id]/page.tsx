@@ -33,14 +33,14 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
           {post.description}
         </p>
       </section>
-      <section className="px-6 py-10">
+      <section className="px-6 py-10 max-w-7xl mx-auto">
         <img
           src={post.image}
           alt="thumbnail"
-          className=" mx-auto  w-auto h-auto rounded-xl"
+          className="w-full h-auto rounded-xl"
         />
-        <div>
-          <div>
+        <div className="space-y-5 mt-10 max-w-4xl mx-auto">
+          <div className="flex-between gap-5">
             <Link href={`/users/${post.author?.id}`} className="flex gap-2">
               <Image
                 src={post.author.image}
