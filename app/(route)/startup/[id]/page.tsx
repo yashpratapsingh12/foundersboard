@@ -23,7 +23,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   return (
     <>
       <section className="w-full bg-[#EE2B69] !min-h-[230px] flex justify-center items-center flex-col py-10 px-6 ">
-        <p className=" w-45  mx-auto  bg-[#FBE843] px-6 py-3 font-bold rounded-sm uppercase relative before:content-[''] before:absolute before:top-2 before:left-2 before:border-t-[10px] before:border-t-black before:border-r-[10px] before:border-r-transparent after:content-[''] after:absolute after:bottom-2 after:right-2 after:border-b-[10px] after:border-b-black after:border-l-[10px] after:border-l-transparent">
+        <p className=" w-45  mx-auto text-center  bg-[#FBE843] px-6 py-3 font-bold rounded-sm uppercase relative before:content-[''] before:absolute before:top-2 before:left-2 before:border-t-[10px] before:border-t-black before:border-r-[10px] before:border-r-transparent after:content-[''] after:absolute after:bottom-2 after:right-2 after:border-b-[10px] after:border-b-black after:border-l-[10px] after:border-l-transparent">
           {formatdate(post?._createdAt)}
         </p>
         <h1 className="w-full bg-black text-white w-80 mx-auto text-center rounded-sm px-3 py-5 mt-2 uppercase font-bold">
@@ -40,8 +40,11 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
           className="w-full h-auto rounded-xl"
         />
         <div className="space-y-5 mt-10 max-w-4xl mx-auto">
-          <div className="flex-between gap-5">
-            <Link href={`/users/${post.author?.id}`} className="flex gap-2">
+          <div className="flex justify-between gap-5">
+            <Link
+              href={`/user/${post.author?._id}`}
+              className="flex gap-2 items-center mb-3"
+            >
               <Image
                 src={post.author.image}
                 alt="user"
@@ -56,20 +59,24 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
                 <p className="text-white-100">@{post.author.username}</p>
               </div>
             </Link>
-            <p>{post.category}</p>
           </div>
-          <h3 className="text-30">Pitch Details</h3>
+          <h3 className="text-30 font-bold">Pitch Details</h3>
           {parsecont ? (
-            <article dangerouslySetInnerHTML={{ __html: parsecont }} />
+            <article
+              className="prose max-w-4xl  break-all"
+              dangerouslySetInnerHTML={{ __html: parsecont }}
+            />
           ) : (
-            <p>No details Provided</p>
+            <p className="text-black-100 text-sm font-normal">
+              No details Provided
+            </p>
           )}
         </div>
-        <hr />
+        <hr className="border-dotted bg-zinc-400 max-w-4xl my-10 mx-auto" />
+        <Suspense fallback={<Skeleton />}>
+          <View id={id} />
+        </Suspense>
       </section>
-      <Suspense fallback={<Skeleton />}>
-        <View id={id} />
-      </Suspense>
     </>
   );
 };
