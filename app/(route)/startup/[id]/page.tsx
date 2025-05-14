@@ -9,6 +9,7 @@ import Link from "next/link";
 import markdownit from "markdown-it";
 import { Skeleton } from "@/components/skeleton";
 import View from "@/components/View";
+import { auth } from "@/auth";
 
 export const experimental_ppr = true;
 const md = markdownit();
@@ -17,8 +18,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = (await params).id;
 
   const post = await client.fetch(STARTUP_BY_ID_QUERY, { id });
-  console.log("pare", post._id);
-  console.log("clue", id);
+  const session = await auth();
 
   if (!post) return notFound();
   const parsecont = md.render(post?.pitch || "");
@@ -63,6 +63,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
               </div>
             </Link>
           </div>
+
           <h3 className="text-30 font-bold">Pitch Details</h3>
           {parsecont ? (
             <article
