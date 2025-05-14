@@ -70,3 +70,54 @@ try{
 
 }
 
+export const updatePitch = async (
+  state: any,
+  form: FormData,
+  pitch: string,
+  postId: string
+) => {
+  const session = await auth();
+
+  if (!session)
+    return parseServerActionResponse({
+      error: "Not signed in",
+      status: "ERROR",
+    });
+
+  const { title, description, category, link } = Object.fromEntries(
+    Array.from(form).filter(([key]) => key !== "pitch")
+  );
+
+  const slug = slugify(title as string, { lower: true, strict: true });
+
+  try {
+    const updatedPost = await writeclient
+      .patch(postId)
+      .set({
+        title,
+        description,
+        category,
+        image: link,
+        slug: {
+          _type: "slug",
+          current: slug,
+        },
+        pitch,
+      })
+      .commit();
+
+    return parseServerActionResponse({
+      ...updatedPost,
+      error: "",
+      status: "SUCCESS",
+    });
+  } catch (error) {
+    console.error("Update failed", error);
+
+    return parseServerActionResponse({
+      error: JSON.stringify(error),
+      status: "ERROR",
+    });
+  }
+};
+

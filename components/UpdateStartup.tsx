@@ -3,13 +3,22 @@
 import { client } from "@/sanity/lib/client";
 import { STARTUP_BY_ID_QUERY } from "@/sanity/lib/queries";
 import { error } from "console";
-import React, { useActionState } from "react";
+import React, { use, useActionState, useEffect } from "react";
 import { useState } from "react";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import MDEditor from "@uiw/react-md-editor";
 import { Button } from "./ui/button";
 import { Send } from "lucide-react";
+import { notFound } from "next/navigation";
+import { PageNotFoundError } from "next/dist/shared/lib/utils";
+import { Startup } from "@/sanity/types";
+import { title } from "process";
+import { updatePitch } from "@/lib/Action";
+import { formSchema } from "@/lib/validation";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { z } from "zod";
 
 const UpdateStartup = ({
   id,
@@ -18,10 +27,61 @@ const UpdateStartup = ({
   id: string | undefined;
   PostID: string;
 }) => {
-  const post = client.fetch(STARTUP_BY_ID_QUERY, { id: PostID });
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  // const post = client.fetch(STARTUP_BY_ID_QUERY, { id: PostID });
+  const [post, setPost] = useState<Startup>();
   const [pitch, setPitch] = useState("");
-  const handleFucntion = (state: any, formData: FormData) => {};
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const router = useRouter();
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const res = await client.fetch(STARTUP_BY_ID_QUERY, { id: PostID });
+
+        setPost(res);
+        setPitch(res?.pitch || "");
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchPost();
+  }, [PostID]);
+
+  const handleFucntion = async (state: any, formData: FormData) => {
+    try {
+      const formValues = {
+        title: formData.get("title") as string,
+        description: formData.get("description") as string,
+        category: formData.get("category") as string,
+        link: formData.get("link") as string,
+        pitch,
+      };
+      console.log(formValues);
+      await formSchema.parseAsync(formValues);
+      const result = await updatePitch(state, formData, pitch, PostID);
+      if (result.status === "SUCCESS") {
+        toast.success("Your pitch has been finally Updated");
+        router.push(`/startup/${result._id}`);
+      }
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        const fieldErorrs = error.flatten().fieldErrors;
+
+        setErrors(fieldErorrs as unknown as Record<string, string>);
+
+        toast.error("Please check your inputs and try again");
+        return { ...state, error: "Validation failed", status: "ERROR" };
+      }
+
+      toast.error("An unexpected error has happened");
+
+      return {
+        ...state,
+        error: "An unexpected error has occurred",
+        status: "ERROR",
+      };
+    }
+  };
 
   const [state, formAction, isPending] = useActionState(handleFucntion, {
     error: "",
@@ -41,6 +101,13 @@ const UpdateStartup = ({
           <Input
             id="title"
             name="title"
+            value={post?.title ?? ""}
+            onChange={(e) =>
+              setPost((prev) => ({
+                ...prev!,
+                title: e.target.value,
+              }))
+            }
             className="rounded-full"
             required
             placeholder="Startup Title"
@@ -58,6 +125,13 @@ const UpdateStartup = ({
           <Textarea
             id="description"
             name="description"
+            value={post?.description ?? ""}
+            onChange={(e) =>
+              setPost((prev) => ({
+                ...prev!,
+                description: e.target.value,
+              }))
+            }
             className="startup-form_textarea"
             required
             placeholder="Startup Description"
@@ -75,6 +149,13 @@ const UpdateStartup = ({
           <Input
             id="category"
             name="category"
+            value={post?.category ?? ""}
+            onChange={(e) =>
+              setPost((prev) => ({
+                ...prev!,
+                category: e.target.value,
+              }))
+            }
             className="rounded-full"
             required
             placeholder="Startup Category (Tech, Health, Education...)"
@@ -92,6 +173,13 @@ const UpdateStartup = ({
           <Input
             id="link"
             name="link"
+            value={post?.image ?? ""}
+            onChange={(e) =>
+              setPost((prev) => ({
+                ...prev!,
+                image: e.target.value,
+              }))
+            }
             className="rounded-full"
             required
             placeholder="Startup Image URL"
