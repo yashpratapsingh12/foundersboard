@@ -73,10 +73,10 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
           )}
         </div>
         <hr className="border-dotted bg-zinc-400 max-w-4xl my-10 mx-auto" />
-        <Suspense fallback={<Skeleton />}>
-          <View id={id} />
-        </Suspense>
       </section>
+      <Suspense fallback={<Skeleton />}>
+        <View id={id} />
+      </Suspense>
     </>
   );
 };
