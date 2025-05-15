@@ -11,7 +11,7 @@ const Navbar = async () => {
     <header className="px-5 py-3 bg-white shadow-sm font-work-sans">
       <nav className="flex justify-between items-center">
         <Link href="/">
-          <p className="font-bold text-3xl mb-1 mr-16">
+          <p className="font-bold text-2xl sm:text-3xl mb-1 mr-4 sm:mr-16">
             <span className="text-[#EE2B69]">Fou</span>
             ndersBoard
           </p>

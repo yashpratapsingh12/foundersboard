@@ -62,7 +62,7 @@ const StarupCard = ({ Posts, id }: { Posts: startupTypeCard; id?: string }) => {
         </div>
         <Link href={`/user/${Posts.author?._id}`}>
           <Image
-            src="https://placehold.co/600x400"
+            src={`${Posts.author?.image}`}
             alt="placeholder"
             width={48}
             height={48}
@@ -76,7 +76,7 @@ const StarupCard = ({ Posts, id }: { Posts: startupTypeCard; id?: string }) => {
       </Link>
       <div>
         <Link href={""}>
-          <p className="ml-4 mt-2">{Posts.category}</p>
+          <p className="ml-4 mt-2 uppercase font-bold">{Posts.category}</p>
         </Link>
       </div>
     </li>

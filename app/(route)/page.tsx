@@ -30,19 +30,21 @@ export default async function Home({
         </p>
         <SearchForm query={query} />
       </section>
-      <section className="ml-3 mt-5">
-        <p className="text-xl font-semibold">
+      <section className=" mt-5">
+        <p className="text-xl font-semibold ml-3">
           {query ? `Searhc results for ${query}` : "All Startups"}
         </p>
-        <ul className="mt-7 grid grid-cols-1 md:grid-cols-3 gap-3">
-          {Posts.length > 0 ? (
-            Posts.map((item: startupTypeCard) => (
-              <StarupCard key={item?._id} Posts={item} />
-            ))
-          ) : (
-            <p className="">No straups found</p>
-          )}
-        </ul>
+        <div className="sm:ml-5">
+          <ul className="mt-7 grid grid-cols-1 md:grid-cols-3 gap-3">
+            {Posts.length > 0 ? (
+              Posts.map((item: startupTypeCard) => (
+                <StarupCard key={item?._id} Posts={item} />
+              ))
+            ) : (
+              <p className="">No straups found</p>
+            )}
+          </ul>
+        </div>
       </section>
       <SanityLive />
     </>
