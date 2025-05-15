@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { EllipsisVertical } from "lucide-react";
 import DeletePost from "./DeletePost";
+import { Button } from "./ui/button";
 
 export type startupTypeCard = Omit<Startup, "author"> & { author?: Author };
 
@@ -37,7 +38,9 @@ const StarupCard = ({ Posts, id }: { Posts: startupTypeCard; id?: string }) => {
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuItem>
-                <Link href={`/startup/update/${Posts._id}`}>Update</Link>
+                <Link href={`/startup/update/${Posts._id}`}>
+                  <Button>Update</Button>
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <DeletePost postid={Posts._id} />

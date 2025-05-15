@@ -4,11 +4,12 @@ import React from "react";
 import { Button } from "./ui/button";
 import { client } from "@/sanity/lib/client";
 import { toast } from "sonner";
+import { writeclient } from "@/sanity/lib/write-client";
+import { deletePost } from "@/lib/Action";
 
 const DeletePost = ({ postid }: { postid: string }) => {
   const handleClick = async () => {
-    await client.delete(postid);
-    toast.success("Startup has been deleted");
+    deletePost(postid);
   };
   return (
     <>

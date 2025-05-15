@@ -5,6 +5,7 @@ import { image } from "@uiw/react-md-editor";
 import slugify from "slugify";
 import { parseServerActionResponse } from "./utils";
 import { signIn } from "@/auth";
+import { toast } from "sonner";
 
 
 export const createPitch= async(state:any, form:FormData,pitch:String)=>{
@@ -121,3 +122,10 @@ export const updatePitch = async (
   }
 };
 
+
+export const deletePost =async(postid:string)=>{
+   
+  await writeclient.delete(postid);
+  
+  
+}
