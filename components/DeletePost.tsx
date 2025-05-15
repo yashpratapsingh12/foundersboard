@@ -9,7 +9,7 @@ import { deletePost } from "@/lib/Action";
 
 const DeletePost = ({ postid }: { postid: string }) => {
   const handleClick = async () => {
-    deletePost(postid);
+    const res = deletePost(postid);
   };
   return (
     <>
