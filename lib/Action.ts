@@ -125,7 +125,8 @@ export const updatePitch = async (
 
 export const deletePost =async(postid:string)=>{
    
-  await writeclient.delete(postid);
+ const res=  await writeclient.delete(postid);
+ return res
   
   
 }

@@ -26,7 +26,7 @@ export default async function Home({
           <br /> Connect with Entrepreneur
         </h1>
         <p className="font-medium text-white text-[20px] text-center">
-          Submit Ideas , Vote on Pitches ,and Get Noticed in Virtual
+          Submit Ideas , See Pitches ,and Get Noticed in Virtual
         </p>
         <SearchForm query={query} />
       </section>
