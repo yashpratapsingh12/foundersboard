@@ -12,7 +12,7 @@ export default async function Home({
   searchParams: Promise<{ query?: string }>;
 }) {
   const query = (await searchParams).query;
-  const params = { search: query || null };
+  const params = { search: query ? `*${query}*` : null };
   const sess = await auth();
 
   // const Posts = await client.fetch(STARTUP_QUERY);

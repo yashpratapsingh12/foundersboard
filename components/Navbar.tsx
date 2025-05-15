@@ -1,8 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { auth, signOut, signIn } from "@/auth";
-import { BadgePlus, LogOut } from "lucide-react";
+import { BadgePlus, LogIn, LogOut } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "./ui/button";
 
 const Navbar = async () => {
   const session = await auth();
@@ -58,7 +59,12 @@ const Navbar = async () => {
                 await signIn("github");
               }}
             >
-              <button type="submit">Login</button>
+              <button type="submit">
+                <span className="max-sm:hidden font-bold text-red-500">
+                  Login
+                </span>
+                <LogIn className="size-6 sm:hidden text-red-500" />
+              </button>
             </form>
           )}
         </div>
