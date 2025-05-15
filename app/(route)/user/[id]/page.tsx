@@ -8,6 +8,7 @@ import Image from "next/image";
 import UserStartups from "@/components/UserStartups";
 import { StartupCardSkeleton } from "@/components/StarupCard";
 import { SanityLive, sanityFetch } from "@/sanity/lib/live";
+import { Skeleton } from "@/components/skeleton";
 
 export const experimental_ppr = true;
 
@@ -45,7 +46,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
             {session?.id === id ? "Your" : "All"} Startups
           </p>
           <ul className="grid sm:grid-cols-2 gap-5">
-            <Suspense fallback={<StartupCardSkeleton />}>
+            <Suspense fallback={<Skeleton />}>
               <UserStartups id={id} />
             </Suspense>
           </ul>
