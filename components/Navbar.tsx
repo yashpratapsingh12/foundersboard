@@ -60,10 +60,7 @@ const Navbar = async () => {
               }}
             >
               <button type="submit">
-                <span className="max-sm:hidden font-bold text-red-500">
-                  Login
-                </span>
-                <LogIn className="size-6 sm:hidden text-red-500" />
+                <span className=" font-bold ">Login</span>
               </button>
             </form>
           )}
