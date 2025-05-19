@@ -21,7 +21,7 @@ const SearchForm = ({ query }: { query?: string }) => {
 
         <button
           type="submit"
-          className="rounded-full bg-black p-3 py-2 text-white"
+          className="rounded-full bg-black p-3 py-2 text-white mr-1"
         >
           <Search className="size-5" />
         </button>
